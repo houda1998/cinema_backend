@@ -25,6 +25,7 @@ private Long id;
 private Date dateProjection;
 private double prix;
 @OneToMany(mappedBy="projection")
+@JsonProperty(access=Access.WRITE_ONLY)
 private Collection<Ticket> tickets;
 @ManyToOne
 private Seance seance;

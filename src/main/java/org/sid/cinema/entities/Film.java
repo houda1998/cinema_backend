@@ -32,7 +32,7 @@ private Date dateSortie;
 private double duree;
 private String photo; 
 @OneToMany(mappedBy="film")
-@JsonProperty(access=Access.READ_ONLY)
+@JsonProperty(access=Access.WRITE_ONLY)
 private Collection<Projection>projection;
 @ManyToOne
 private Categorie categorie;
