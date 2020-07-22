@@ -47,7 +47,7 @@ public class CinemaInitServiceImp implements IcinemaInitService{
 @Override
 	public void initCategory() {
 		// TODO Auto-generated method stub
-		Stream.of("Histoire","Actions","Fiction","Drama","Policier","Thriller","Comedie")
+		Stream.of("Actions","Fiction","Drama","Policier","Comedie")
 		.forEach(cat->{
 			Categorie categorie=new Categorie();
 			categorie.setName(cat);
@@ -78,7 +78,7 @@ public class CinemaInitServiceImp implements IcinemaInitService{
 		// TODO Auto-generated method stub
 		double[]durees=new double[] {1,1.5,2,2.5,3};
 		List<Categorie>categories=categoryRepository.findAll();
-		Stream.of("12 Hommes en colere","Forrest Gump","Green Book","La Ligne Verte","Le Parrain","Le Seigneur des anneaux")
+		Stream.of("Black Panther","Aladdin","Avengers End Game","Bad Boys 3","Frozen2","Home Alone","The Terminal","HobbsandShaw","Dora")
 		.forEach(titreFilm->{
 			Film film=new Film();
 			film.setTitre(titreFilm);
@@ -111,12 +111,15 @@ public class CinemaInitServiceImp implements IcinemaInitService{
 	public void initProjections() {
 		// TODO Auto-generated method stub
 		double[]prices=new double[] {30,50,60,70,90,100};
+		List<Film>films=filmRepository.findAll();
 		villeRepository.findAll()
 		.forEach(ville->{
 			ville.getCinemas().forEach(cinema->{
 				cinema.getSalles().forEach(salle->{
-					filmRepository.findAll()
-					.forEach(film->{
+					int index=new Random().nextInt(films.size());
+				
+					
+					Film film=films.get(index);
 						seanceRepository.findAll()
 						.forEach(seance->{
 							Projection projection=new Projection();
@@ -127,7 +130,7 @@ public class CinemaInitServiceImp implements IcinemaInitService{
 							projection.setSeance(seance);
 							projectionRepository.save(projection);
 						});
-					});
+					
 				});
 			});
 		});
